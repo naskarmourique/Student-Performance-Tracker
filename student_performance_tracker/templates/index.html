@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student Performance Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1>Student Performance Tracker</h1>
+                    <p class="tagline">Your all-in-one solution for tracking student success.</p>
+                </div>
+            </div>
+            <div class="header-meta">
+                <p class="welcome-text">Welcome, {{ current_user.username }}!</p> <br>
+                <a href="{{ url_for('logout') }}" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Add Student Form -->
+        <div class="form-card">
+            <h3>
+                <i class="fas fa-user-plus"></i> Add New Student
+            </h3>
+            <form method="POST" action="{{ url_for('add_student') }}" class="form-inline">
+                <div class="form-group">
+                    <label for="name">Student Name</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="name" 
+                           name="name" 
+                           placeholder="Enter student name" 
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="roll_number">Roll Number</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="roll_number" 
+                           name="roll_number" 
+                           placeholder="Enter roll number" 
+                           required>
+                </div>
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Student
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Students List -->
+        <div class="form-card">
+            <h3>
+                <i class="fas fa-users"></i> All Students ({{ students|length }})
+            </h3>
+            
+            {% if students %}
+                <div class="students-grid">
+                    {% for student in students %}
+                        <div class="student-card">
+                            <div class="student-info">
+                                <div class="student-name">
+                                    <i class="fas fa-user-graduate"></i> {{ student.name }}
+                                </div>
+                                <div class="student-roll">
+                                    Roll No: {{ student.roll_number }}
+                                </div>
+                            </div>
+                            <div class="student-actions">
+                                <a href="{{ url_for('student_details', id=student.id) }}" 
+                                   class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye"></i> View Details
+                                </a>
+                                <a href="{{ url_for('edit_student', id=student.id) }}" 
+                                   class="btn btn-secondary btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <form method="post" 
+                                      action="{{ url_for('delete_student', id=student.id) }}" 
+                                      style="display: inline;"
+                                      onsubmit="return confirm('Are you sure you want to delete this student?');">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-user-slash"></i>
+                    </div>
+                    <h3>No Students Added Yet</h3>
+                    <p>Start by adding your first student using the form above.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="form-card">
+            <h3>
+                <i class="fas fa-chart-line"></i> Subject Statistics
+            </h3>
+            <form method="GET" action="{{ url_for('stats') }}" class="form-inline">
+                <div class="form-group">
+                    <label for="subject">Subject Name</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="subject" 
+                           name="subject" 
+                           placeholder="e.g., Mathematics, Science" 
+                           required>
+                </div>
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-chart-bar"></i> Get Statistics
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Backup Section -->
+        <div class="form-card">
+            <h3>
+                <i class="fas fa-download"></i> Data Backup
+            </h3>
+            <p style="margin-bottom: 15px; color: #6c757d;">
+                Download a backup of all student data and grades in text format.
+            </p>
+            <a href="{{ url_for('backup') }}" class="btn btn-secondary">
+                <i class="fas fa-file-download"></i> Download Backup
+            </a>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Student Performance Tracker. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
