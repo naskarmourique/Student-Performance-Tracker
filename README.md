@@ -18,6 +18,28 @@ A web application to track the academic performance of students. Teachers can lo
 *   **Authentication:** Flask-Login
 *   **Frontend:** HTML, CSS
 
+## File Structure
+
+```
+.
+├── .gitignore
+├── Procfile
+├── README.md
+├── app.py
+├── requirements.txt
+├── static
+│   └── css
+│       └── style.css
+├── templates
+│   ├── edit_grade.html
+│   ├── edit_student.html
+│   ├── index.html
+│   ├── login.html
+│   ├── stats.html
+│   └── student_details.html
+└── test_db.py
+```
+
 ## Getting Started
 
 To get a local copy up and running, follow these simple steps.
