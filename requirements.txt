@@ -4,4 +4,3 @@ Flask-Login
 psycopg2-binary
 python-dotenv
 gunicorn
-pytest
