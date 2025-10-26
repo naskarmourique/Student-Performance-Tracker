@@ -2,5 +2,8 @@
 # exit on error
 set -o errexit
 
-apt-get update && apt-get install -y libpq-dev
 pip install -r requirements.txt
+
+export FLASK_APP=app.py
+flask init-db
+flask create-user
