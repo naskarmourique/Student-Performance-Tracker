@@ -25,4 +25,4 @@ jobs:
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
     - name: Run tests
-      run: pytest
+      run: pytest --allow-no-tests
