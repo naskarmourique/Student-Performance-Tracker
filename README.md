@@ -96,13 +96,57 @@ To get a local copy up and running, follow these simple steps.
 
 ## 💻 Usage
 
-To run the application locally, use the following command:
+### 1. Logging In
 
-```sh
-flask run
-```
+The application requires teachers to log in to access the student data.
 
-Open your web browser and navigate to `http://127.0.0.1:5000`.
+*   **Username:** Mourique
+*   **Password:** izya
+
+### 2. Home Page
+
+After logging in, you will be redirected to the home page, which displays a list of all the students.
+
+### 3. Adding a Student
+
+To add a new student:
+1.  On the home page, you will find a form to add a new student.
+2.  Enter the student's name and roll number.
+3.  Click the "Add Student" button.
+
+### 4. Viewing Student Details and Performance
+
+To view a student's details and performance:
+1.  On the home page, click on the student's name.
+2.  This will take you to the student's details page, where you can see their grades for each subject and their average score.
+
+### 5. Adding Grades
+
+To add a grade for a student:
+1.  Go to the student's details page.
+2.  You will find a form to add a new grade.
+3.  Enter the subject and the marks obtained.
+4.  Click the "Add Grade" button.
+
+### 6. Editing and Deleting Students and Grades
+
+You can edit or delete students and grades from their respective pages.
+*   To edit a student's details, click the "Edit" button on the home page next to the student's name.
+*   To delete a student, click the "Delete" button on the home page next to the student's name.
+*   To edit or delete a grade, go to the student's details page and you will find options to edit or delete each grade.
+
+### 7. Viewing Subject Statistics
+
+To view statistics for a specific subject:
+1.  Click on the "Stats" link in the navigation bar.
+2.  Enter the subject name and click "Get Stats".
+3.  This will show you the class average and the topper for that subject.
+
+### 8. Backing Up Data
+
+To back up all student data:
+1.  Click on the "Backup" link in the navigation bar.
+2.  This will download a text file containing all the student data.
 
 ---
 
